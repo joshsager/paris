@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Display a map on a webpage</title>
+<title>Map of Quartier Asiatique</title>
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 <link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
@@ -94,14 +94,38 @@ body { margin: 0; padding: 0; }
                 'type':'Feature',
                 'geometry':{
                     'type':'Point',
-                    'coordinates':[2.3642363316111683, 48.8264658076551]
+                    'coordinates':[2.365099079343954, 48.825856305238105]
                 },
                 'properties':{
-                  'description':'The following are videos about the Asian Quarter in Paris.',
-                  'title':'Triangle De Choisy'
+                  'title':'Dalle des Olympiades',
+                  'description':"En raison de la hauteur des tours, les Parisiens trouvaient que la dalle des Olympiades ressemblait à la banlieue et ne souhaitaient donc pas y vivre. Par conséquent, les tours étaient sous-occupées. C'est avec l'arrivée d'environ 145 000 réfugiés en 1975 que les choses ont changé. En effet, ces personnes d'origine asiatique s'y sont installées, parfois avec plusieurs familles par appartement pour faire des économies."
                   
                 }
-              }
+              },
+              {
+                'type':'Feature',
+                'geometry':{
+                    'type':'Point',
+                    'coordinates':[2.364366531391845, 48.82311468964129]
+                },
+                'properties':{
+                  'title':'Stèle Jardin Baudricourt',
+                  'description':"Cette stèle n'est pas facile à trouver sauf si vous la cherchez. Elle se trouve dans le jardin Baudricourt, et rend hommage aux travailleurs et combattants chinois morts pour la France pendant la Première Guerre Mondiale."
+                  
+                }
+              },
+              {
+                'type':'Feature',
+                'geometry':{
+                    'type':'Point',
+                    'coordinates':[2.3592268619808494, 48.82829883197341]
+                },
+                'properties':{
+                  'title':'Stèle Parc de Choisy',
+                  'description':"Cette stèle a été inaugurée dans le Parc de Choisy le 17 avril 2018 pour rendre hommage aux victimes du génocide commis par les khmers rouges au Cambodge de 1975 à 1979."
+                  
+                }
+              },
             ]
 
           }
@@ -124,36 +148,39 @@ body { margin: 0; padding: 0; }
 
       // LOCATIONS CLICK
       map.on('click', 'location_points', (e) => {
+
+//         let video =`
+//         <iframe id="vimeo-player" src="https://player.vimeo.com/video/921089310?autoplay=1&loop=1&autopause=0&playsinline=1" width="640" height="360" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+// <p><a href="https://vimeo.com/921089310">Dalle des Olympiades</a> from <a href="https://vimeo.com/user207379052">Cheryl Zhang</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+//           `
         console.log("Clicked", e)
+        let output = `<div>
+          <h2>${e.features[0].properties.title}</h2>
+          <p>${e.features[0].properties.description}</p>
+          </div>`
+        
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
-        .setHTML(`
-        
-        <iframe id="vimeo-player" src="https://player.vimeo.com/video/921089310?autoplay=1&loop=1&autopause=0&playsinline=1" width="640" height="360" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-<p><a href="https://vimeo.com/921089310">Dalle des Olympiades</a> from <a href="https://vimeo.com/user207379052">Cheryl Zhang</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-          `
-            
-          
-        )
+        .setHTML(output)
         .addTo(map);
 
         var iframe = document.querySelector('#vimeo-player');
         var player = new Vimeo.Player(iframe);
 
-        function requestFullScreen(element) {
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.mozRequestFullScreen) {
-        element.mozRequestFullScreen(); // Firefox
-    } else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen(); // Chrome, Safari and Opera
-    } else if (element.msRequestFullscreen) {
-        element.msRequestFullscreen(); // IE/Edge
-    }
-}
+        // function requestFullScreen(element) {
+        //   if (element.requestFullscreen) {
+        //       element.requestFullscreen();
+        //   } else if (element.mozRequestFullScreen) {
+        //       element.mozRequestFullScreen(); // Firefox
+        //   } else if (element.webkitRequestFullscreen) {
+        //       element.webkitRequestFullscreen(); // Chrome, Safari and Opera
+        //   } else if (element.msRequestFullscreen) {
+        //       element.msRequestFullscreen(); // IE/Edge
+        //   }
+        // }
 
-var iframeElement = document.querySelector('#vimeo-player');
-requestFullScreen(iframeElement); 
+        // var iframeElement = document.querySelector('#vimeo-player');
+        // requestFullScreen(iframeElement); 
 
 // requestFullScreen(document.querySelector('#vimeo-player'))
 
