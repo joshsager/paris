@@ -87,8 +87,8 @@ a.btn:hover{
   -moz-box-shadow: 0px 0px 38px 3px rgba(0,0,0,0.5);
   box-shadow: 0px 0px 38px 3px rgba(0,0,0,0.5);
   position: relative;
-  top: 0;
-  width: 100%;
+  top: 3em;
+  width: 75%;
   background-color: white;
   z-index: 2;
   margin: 0 auto;
@@ -212,11 +212,10 @@ a.btn:hover{
                   'title':'Stèle Jardin Baudricourt',
                   'description':"Cette stèle n'est pas facile à trouver sauf si vous la cherchez. Elle se trouve dans le jardin Baudricourt, et rend hommage aux travailleurs et combattants chinois morts pour la France pendant la Première Guerre Mondiale.",
                   'button_1_label':"Plus d'infos",
-                  'button_1_url':'https://www.parismosaique.fr/jardin-baudricourt',
+                  'button_1_url':'https://www.parismosaique.fr/dalle-des-olympiades',
                   'button_2_label':null,
                   'button_2_url':null,
                 }
-                
               },
               {
                 'type':'Feature',
@@ -228,9 +227,9 @@ a.btn:hover{
                   'title':'Stèle Parc de Choisy',
                   'description':"Cette stèle a été inaugurée dans le Parc de Choisy le 17 avril 2018 pour rendre hommage aux victimes du génocide commis par les khmers rouges au Cambodge de 1975 à 1979.",
                   'button_1_label':"Plus d'infos",
-                  'button_1_url':'https://www.parismosaique.fr/stele-parc-de-choisy',
+                  'button_1_url':'https://www.parismosaique.fr/dalle-des-olympiades',
                   'button_2_label':"Balade",
-                  'button_2_url':'https://player.vimeo.com/video/932875880',
+                  'button_2_url':'https://player.vimeo.com/video/928776408',
                   
                 }
               },
@@ -327,23 +326,23 @@ a.btn:hover{
                         }
                       }
 
-                      // requestFullScreen(iframe)
+                      requestFullScreen(iframe)
 
                       
 
-                      // function checkFullScreen(){
+                      function checkFullScreen(){
                         
-                      //   if(document.fullscreenElement){
-                      //     console.log("is full screen")
-                      //   }else{
-                      //     clearInterval(fullScreenInterval)
-                      //     console.log("all done")
-                      //     vid_wrapper.innerHTML = null;
-                      //   }
+                        if(document.fullscreenElement){
+                          console.log("is full screen")
+                        }else{
+                          clearInterval(fullScreenInterval)
+                          console.log("all done")
+                          vid_wrapper.innerHTML = null;
+                        }
 
-                      // }
+                      }
 
-                      // var fullScreenInterval = setInterval(checkFullScreen, 100);
+                      var fullScreenInterval = setInterval(checkFullScreen, 100);
 
 
                      
