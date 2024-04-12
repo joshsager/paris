@@ -24,8 +24,11 @@ body { margin: 0; padding: 0;
 }
 
 a#closeBTN{
-  font-size: 2em;
+  font-size: 1.75em;
   cursor: pointer;
+  padding: .25em .5em;
+  text-transform: uppercase;
+  float: right;
 }
 a#closeBTN:hover{
   background-color: #ccc;
@@ -60,6 +63,7 @@ a.btn:hover{
 }
 .popup header{
   display: flex;
+  align-items: center;
 }
 .popup img{
   width:45px;
@@ -72,19 +76,23 @@ a.btn:hover{
 .popup p{
   font-size:1.8em;
   line-height: 1.8em;
+  margin-top: 0;
 }
 .hide{
   display: none;
 }
 
 #customPopup{
+  -webkit-box-shadow: 0px 0px 38px 3px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 0px 38px 3px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 38px 3px rgba(0,0,0,0.5);
   position: relative;
   top: 3em;
   width: 75%;
   background-color: white;
   z-index: 2;
   margin: 0 auto;
-  padding: 2em;
+  padding: 0 2em 2em 2em;
   z-index: -1;
 }
 </style>
@@ -261,12 +269,14 @@ a.btn:hover{
 
 
         let output = `<div class="popup">
+          <div>
+              <a id='closeBTN'>x</a>
+          </div>
           <header>
-            <div>
+           <div>
               <img src='images/map-pin.png' alt='map pin icon'>
             </div>
             <h2>${e.features[0].properties.title}</h2>
-            <a id='closeBTN'>x</a>
           </header>
            
           <p>${e.features[0].properties.description}</p>
