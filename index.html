@@ -6,15 +6,95 @@
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 <link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
 <style>
-body { margin: 0; padding: 0; }
+
+body { margin: 0; padding: 0; 
+  font-family: "EB Garamond", serif;
+  font-optical-sizing: auto;
+  /* font-weight: <weight>; */
+  font-style: normal;
+
+}
+
+.quad-top{
+  margin-top: 4em;
+}
+
+a#closeBTN{
+  font-size: 2em;
+  cursor: pointer;
+}
+a#closeBTN:hover{
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+a.btn{
+  background-color: #014235;
+  padding: .5em 1em;
+  color:white;
+  border: solid white thin;
+  transition: all .5s;
+  font-size: 1.5em;
+  text-decoration: none;
+}
+
+a.btn:hover{
+  color: #014235;
+  border: solid #014235 thin;
+  background-color: white;
+}
+
+.mapboxgl-popup-close-button{
+ font-size: 1.5em;
+}
 #map { position: absolute; top: 0; bottom: 0; width: 100%; }
-.mapboxgl-popup-content{width:250px;}
+.mapboxgl-popup-content{width:650px;}
+.popup {
+  font-family: "EB Garamond", serif;
+  padding: 2em;
+  font-size:100%;
+}
+.popup header{
+  display: flex;
+}
+.popup img{
+  width:45px;
+}
+.popup h2 {
+  font-size:3.75em;
+  margin: .5em;
+  font-weight: normal;
+}
+.popup p{
+  font-size:1.8em;
+  line-height: 1.8em;
+}
+.hide{
+  display: none;
+}
+
+#customPopup{
+  position: relative;
+  top: 3em;
+  width: 75%;
+  background-color: white;
+  z-index: 2;
+  margin: 0 auto;
+  padding: 2em;
+  z-index: -1;
+}
 </style>
 <script src="https://player.vimeo.com/api/player.js"></script>
 
 </head>
 <body>
+  <div id="customPopup">
+
+  </div>
 <div id="map"></div>
 <script>
 	// TO MAKE THE MAP APPEAR YOU MUST
@@ -36,6 +116,15 @@ body { margin: 0; padding: 0; }
 
 
     map.on('load', () => {
+
+      map.loadImage(
+            'images/map-pin.png',
+            function (error, image) {
+            if (error) throw error;
+            
+            // Add the image to the map style.
+            map.addImage('mapPin', image);
+            })
 
       // Insert the layer beneath any symbol layer.
       const layers = map.getStyle().layers;
@@ -98,8 +187,11 @@ body { margin: 0; padding: 0; }
                 },
                 'properties':{
                   'title':'Dalle des Olympiades',
-                  'description':"En raison de la hauteur des tours, les Parisiens trouvaient que la dalle des Olympiades ressemblait à la banlieue et ne souhaitaient donc pas y vivre. Par conséquent, les tours étaient sous-occupées. C'est avec l'arrivée d'environ 145 000 réfugiés en 1975 que les choses ont changé. En effet, ces personnes d'origine asiatique s'y sont installées, parfois avec plusieurs familles par appartement pour faire des économies."
-                  
+                  'description':"En raison de la hauteur des tours, les Parisiens trouvaient que la dalle des Olympiades ressemblait à la banlieue et ne souhaitaient donc pas y vivre. Par conséquent, les tours étaient sous-occupées. C'est avec l'arrivée d'environ 145 000 réfugiés en 1975 que les choses ont changé. En effet, ces personnes d'origine asiatique s'y sont installées, parfois avec plusieurs familles par appartement pour faire des économies.",
+                  'button_1_label':"Plus d'infos",
+                  'button_1_url':'https://www.parismosaique.fr/dalle-des-olympiades',
+                  'button_2_label':"Balade",
+                  'button_2_url':'https://player.vimeo.com/video/928776408',
                 }
               },
               {
@@ -110,8 +202,11 @@ body { margin: 0; padding: 0; }
                 },
                 'properties':{
                   'title':'Stèle Jardin Baudricourt',
-                  'description':"Cette stèle n'est pas facile à trouver sauf si vous la cherchez. Elle se trouve dans le jardin Baudricourt, et rend hommage aux travailleurs et combattants chinois morts pour la France pendant la Première Guerre Mondiale."
-                  
+                  'description':"Cette stèle n'est pas facile à trouver sauf si vous la cherchez. Elle se trouve dans le jardin Baudricourt, et rend hommage aux travailleurs et combattants chinois morts pour la France pendant la Première Guerre Mondiale.",
+                  'button_1_label':"Plus d'infos",
+                  'button_1_url':'https://www.parismosaique.fr/dalle-des-olympiades',
+                  'button_2_label':null,
+                  'button_2_url':null,
                 }
               },
               {
@@ -122,7 +217,11 @@ body { margin: 0; padding: 0; }
                 },
                 'properties':{
                   'title':'Stèle Parc de Choisy',
-                  'description':"Cette stèle a été inaugurée dans le Parc de Choisy le 17 avril 2018 pour rendre hommage aux victimes du génocide commis par les khmers rouges au Cambodge de 1975 à 1979."
+                  'description':"Cette stèle a été inaugurée dans le Parc de Choisy le 17 avril 2018 pour rendre hommage aux victimes du génocide commis par les khmers rouges au Cambodge de 1975 à 1979.",
+                  'button_1_label':"Plus d'infos",
+                  'button_1_url':'https://www.parismosaique.fr/dalle-des-olympiades',
+                  'button_2_label':"Balade",
+                  'button_2_url':'https://player.vimeo.com/video/928776408',
                   
                 }
               },
@@ -136,12 +235,12 @@ body { margin: 0; padding: 0; }
       // ADD LOCATIONS LAYER
       map.addLayer({
         'id': 'location_points',
-        'type': 'circle',
+        'type': 'symbol',
         'source': 'locations',
-        'paint': {
-            'circle-radius': 10,
-            'circle-color': '#B42222'
-          },
+        'layout': {
+              'icon-image': 'mapPin', // reference the image
+              'icon-size': .75
+            },
           'filter': ['==', '$type', 'Point']
         });
       // END LOCATIONS LAYER
@@ -150,42 +249,126 @@ body { margin: 0; padding: 0; }
       map.on('click', 'location_points', (e) => {
 
 //         let video =`
-//         <iframe id="vimeo-player" src="https://player.vimeo.com/video/921089310?autoplay=1&loop=1&autopause=0&playsinline=1" width="640" height="360" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+//         <iframe id="vimeo-player" src="${e.features[0].properties.button_2_url}?autoplay=1&loop=1&autopause=0&playsinline=1" width="100%" height="360" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+          // </div>
 // <p><a href="https://vimeo.com/921089310">Dalle des Olympiades</a> from <a href="https://vimeo.com/user207379052">Cheryl Zhang</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 //           `
         console.log("Clicked", e)
-        let output = `<div>
-          <h2>${e.features[0].properties.title}</h2>
+
+        document.getElementById("customPopup").style.zIndex="99999999";
+
+        let popup = document.getElementById(customPopup)
+
+
+        let output = `<div class="popup">
+          <header>
+            <div>
+              <img src='images/map-pin.png' alt='map pin icon'>
+            </div>
+            <h2>${e.features[0].properties.title}</h2>
+            <a id='closeBTN'>x</a>
+          </header>
+           
           <p>${e.features[0].properties.description}</p>
-          </div>`
+          `
+          // ADD BUTTONS
+          // IF THE FIRST BUTTON IS NOT NULL
+          if (e.features[0].properties.button_1_url){
+            output+=`
+                  <div class="quad-top">
+                    <a class="btn" href="${e.features[0].properties.button_1_url}">${e.features[0].properties.button_1_label}</a>
+                  `
+                  // IF THE SECOND BUTTON IS NOT NULL
+                  if (e.features[0].properties.button_2_label){
+                    output+=`<a id='video_btn' class="btn" href="javascript:void(0))">${e.features[0].properties.button_2_label}</a>
+                    <div id="video-container"></div>
+                    `
+
+                    // VIDEO LOGIC
+                    var vid_url = e.features[0].properties.button_2_url
+
+                    myTimeout = setTimeout(function(){ 
+                      
+                      setupBTN()}, 250);
+
+                    function showVideo(e){
+                      e.preventDefault()
+                      console.log("video is displayed");
+                      clearTimeout(myTimeout);
+
+                      var vid_wrapper = document.getElementById("video-container");
+                      vid_wrapper.innerHTML = `<iframe id="vimeo-player" src="${vid_url}?autoplay=1&loop=1&autopause=0&playsinline=1" width="100%" height="360" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+
+                      // FULL SCREEN ON CLICK
+                      var iframe = document.querySelector('#vimeo-player');
+                      var player = new Vimeo.Player(iframe);
+
+                      // GETS FULL SCREEN FROM BROWSER
+                      function requestFullScreen(element) {
+                        if (element.requestFullscreen) {
+                            element.requestFullscreen();
+                        } else if (element.mozRequestFullScreen) {
+                            element.mozRequestFullScreen(); // Firefox
+                        } else if (element.webkitRequestFullscreen) {
+                            element.webkitRequestFullscreen(); // Chrome, Safari and Opera
+                        } else if (element.msRequestFullscreen) {
+                            element.msRequestFullscreen(); // IE/Edge
+                        }
+                      }
+
+                      requestFullScreen(iframe)
+
+                      
+
+                      function checkFullScreen(){
+                        
+                        if(document.fullscreenElement){
+                          console.log("is full screen")
+                        }else{
+                          clearInterval(fullScreenInterval)
+                          console.log("all done")
+                          vid_wrapper.innerHTML = null;
+                        }
+
+                      }
+
+                      var fullScreenInterval = setInterval(checkFullScreen, 100);
+
+
+                     
+
+                    }
+
+                    function setupBTN(vid_url){
+                      document.getElementById("video_btn").addEventListener("click", showVideo);
+                    }
+
+                    // END VIDEO LOGIC
+
+                  }
+            output +=`</div>`
+          }
+
+        customPopup.innerHTML= output;
+
+        function close(){
+          customPopup.innerHTML = null;
+          customPopup.style.zIndex = -1;
+        }
+        document.getElementById("closeBTN").addEventListener("click", close);
+
+        // END ADD BUTTONS
         
-        new mapboxgl.Popup()
-        .setLngLat(e.lngLat)
-        .setHTML(output)
-        .addTo(map);
+        // new mapboxgl.Popup()
+        // .setLngLat(e.lngLat)
+        // .setHTML(output)
+        // .addTo(map);
 
-        var iframe = document.querySelector('#vimeo-player');
-        var player = new Vimeo.Player(iframe);
+        
 
-        // function requestFullScreen(element) {
-        //   if (element.requestFullscreen) {
-        //       element.requestFullscreen();
-        //   } else if (element.mozRequestFullScreen) {
-        //       element.mozRequestFullScreen(); // Firefox
-        //   } else if (element.webkitRequestFullscreen) {
-        //       element.webkitRequestFullscreen(); // Chrome, Safari and Opera
-        //   } else if (element.msRequestFullscreen) {
-        //       element.msRequestFullscreen(); // IE/Edge
-        //   }
-        // }
+        
 
-        // var iframeElement = document.querySelector('#vimeo-player');
-        // requestFullScreen(iframeElement); 
-
-// requestFullScreen(document.querySelector('#vimeo-player'))
-
-        // var videoElement = document.getElementById('videoId');    
-        // videoElement.webkitRequestFullScreen();
+        
         });
       // END LOCATIONS CLICK
 
