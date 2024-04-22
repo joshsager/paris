@@ -9,11 +9,11 @@
       },
       "properties":{
         "title":"Galerie Oslo",
-        "description":"De la dalle des Olympiades, on passe par la galerie Oslo pour arriver à l'avenue d'Ivry. Dans ce centre commercial, on peut trouver de nombreux commerces « ethniques », tels que des restaurants, des bijouteries, des magasins de cassettes audio ou vidéo, des boutiques de prêt-à-porter avec des robes chinoises et des tissus chamarrés, des agences de voyage, et des boutiques de téléphonie.",
+        "description":"De Tang Frères, on passe par la galerie Oslo pour arriver à la dalle des Olympiades. Dans ce centre commercial, on peut trouver de nombreux commerces « ethniques », tels que des restaurants, des bijouteries, des magasins de cassettes audio ou vidéo, des boutiques de prêt-à-porter avec des robes chinoises et des tissus chamarrés, des agences de voyage, et des boutiques de téléphonie.",
         "button_1_label":"Plus d'infos",
         "button_1_url":"https://www.parismosaique.fr/galerie-oslo",
-        "button_2_label":null,
-        "button_2_url":null
+        "button_2_label":"Balade",
+        "button_2_url":"https://player.vimeo.com/video/934308660"
       }
     },
     {

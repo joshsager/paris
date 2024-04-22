@@ -144,6 +144,18 @@ a.btn:hover{
 
 }
 
+.backWrapper{
+  z-index: 1;
+  position: absolute;
+  height: 50px;
+  margin: .5em;
+  top:1em;
+
+}
+.backWrapper .btn{
+  border: none;;
+}
+
 
 </style>
 <script src="https://player.vimeo.com/api/player.js"></script>
@@ -151,6 +163,9 @@ a.btn:hover{
 
 </head>
 <body>
+  <div class="backWrapper">
+    <a class="btn" href="https://www.parismosaique.fr/parcours">Parcours</a>
+  </div>
   <div id="customPopup">
 
   </div>
@@ -392,41 +407,41 @@ fetch('data/historique.geojson')
                       var iframe = document.querySelector('#vimeo-player');
                       var player = new Vimeo.Player(iframe);
 
-                      document.getElementById("popup").style.display="none";
-                      document.getElementById("customPopup").style.width="95%";
-                      document.getElementById("customPopup").style.top="1em";
+                      // document.getElementById("popup").style.display="none";
+                      // document.getElementById("customPopup").style.width="95%";
+                      // document.getElementById("customPopup").style.top="1em";
 
 
-                      // // GETS FULL SCREEN FROM BROWSER
-                      // function requestFullScreen(element) {
-                      //   if (element.requestFullscreen) {
-                      //       element.requestFullscreen();
-                      //   } else if (element.mozRequestFullScreen) {
-                      //       element.mozRequestFullScreen(); // Firefox
-                      //   } else if (element.webkitRequestFullscreen) {
-                      //       element.webkitRequestFullscreen(); // Chrome, Safari and Opera
-                      //   } else if (element.msRequestFullscreen) {
-                      //       element.msRequestFullscreen(); // IE/Edge
-                      //   }
-                      // }
+                      // GETS FULL SCREEN FROM BROWSER
+                      function requestFullScreen(element) {
+                        if (element.requestFullscreen) {
+                            element.requestFullscreen();
+                        } else if (element.mozRequestFullScreen) {
+                            element.mozRequestFullScreen(); // Firefox
+                        } else if (element.webkitRequestFullscreen) {
+                            element.webkitRequestFullscreen(); // Chrome, Safari and Opera
+                        } else if (element.msRequestFullscreen) {
+                            element.msRequestFullscreen(); // IE/Edge
+                        }
+                      }
 
-                      // requestFullScreen(iframe)
+                      requestFullScreen(iframe)
 
                       
 
-                      // function checkFullScreen(){
+                      function checkFullScreen(){
                         
-                      //   if(document.fullscreenElement){
-                      //     console.log("is full screen")
-                      //   }else{
-                      //     clearInterval(fullScreenInterval)
-                      //     console.log("all done")
-                      //     vid_wrapper.innerHTML = null;
-                      //   }
+                        if(document.fullscreenElement){
+                          console.log("is full screen")
+                        }else{
+                          clearInterval(fullScreenInterval)
+                          console.log("all done")
+                          vid_wrapper.innerHTML = null;
+                        }
 
-                      // }
+                      }
 
-                      // var fullScreenInterval = setInterval(checkFullScreen, 100);
+                      var fullScreenInterval = setInterval(checkFullScreen, 100);
 
                     }
 
