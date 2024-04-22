@@ -1,0 +1,18 @@
+{
+    "type":"FeatureCollection",
+    "features":[
+      {
+        "title":"Denis",
+        "description":"Denis raconte l&rsquo;histoire de comment ses parents ont fuit le génocide au Cambodge",
+        "image":"images/Avatars2_Denis.png",
+        "audio":"audio/Denis historique.m4a"
+      },
+      {
+        "title":"Diane",
+        "description":"Diane raconte l&rsquo;histoire de son arrivée en France avec sa famille",
+        "image":"images/Avatars2_Diane.png",
+        "audio":"audio/Diane historique.m4a"
+      }
+    ]
+
+  }

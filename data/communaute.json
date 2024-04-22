@@ -1,0 +1,18 @@
+{
+    "type":"FeatureCollection",
+    "features":[
+      {
+        "title":"Boulomsouk",
+        "description":"Boulomsouk raconte l'évolution de l'asiomilitantisme en France",
+        "image":"images/Avatars2_Boulomsouk.png",
+        "audio":"audio/Boulomsouk communaute clip.m4a"
+      },
+      {
+        "title":"Linda",
+        "description":"Linda parle de son inspiration pour l'exposition \"Humans of Chinatown\" et sa relation avec des communautés autour de l'Asie",
+        "image":"images/Avatars2_Linda.png",
+        "audio":"audio/Linda communaute.m4a"
+      }
+    ]
+
+  }

@@ -1,0 +1,52 @@
+{
+    "type":"FeatureCollection",
+    "features":[
+      {
+        "type":"Feature",
+        "geometry":{
+            "type":"Point",
+            "coordinates":[2.365099079343954, 48.825856305238105]
+        },
+        "properties":{
+          "title":"Dalle des Olympiades",
+          "description":"En raison de la hauteur des tours, les Parisiens trouvaient que la dalle des Olympiades ressemblait à la banlieue et ne souhaitaient donc pas y vivre. Par conséquent, les tours étaient sous-occupées. C'est avec l'arrivée d'environ 145 000 réfugiés en 1975 que les choses ont changé. En effet, ces personnes d'origine asiatique s'y sont installées, parfois avec plusieurs familles par appartement pour faire des économies.",
+          "button_1_label":"Plus d'infos",
+          "button_1_url":"https://www.parismosaique.fr/dalle-des-olympiades",
+          "button_2_label":"Balade",
+          "button_2_url":"https://player.vimeo.com/video/928776408"
+        }
+      },
+      {
+        "type":"Feature",
+        "geometry":{
+            "type":"Point",
+            "coordinates":[2.364366531391845, 48.82311468964129]
+        },
+        "properties":{
+          "title":"Stèle Jardin Baudricourt",
+          "description":"Cette stèle n'est pas facile à trouver sauf si vous la cherchez. Elle se trouve dans le jardin Baudricourt, et rend hommage aux travailleurs et combattants chinois morts pour la France pendant la Première Guerre Mondiale.",
+          "button_1_label":"Plus d'infos",
+          "button_1_url":"https://www.parismosaique.fr/dalle-des-olympiades",
+          "button_2_label":null,
+          "button_2_url":null
+        }
+      },
+      {
+        "type":"Feature",
+        "geometry":{
+            "type":"Point",
+            "coordinates":[2.3592268619808494, 48.82829883197341]
+        },
+        "properties":{
+          "title":"Stèle Parc de Choisy",
+          "description":"Cette stèle a été inaugurée dans le Parc de Choisy le 17 avril 2018 pour rendre hommage aux victimes du génocide commis par les khmers rouges au Cambodge de 1975 à 1979.",
+          "button_1_label":"Plus d'infos",
+          "button_1_url":"https://www.parismosaique.fr/dalle-des-olympiades",
+          "button_2_label":"Balade",
+          "button_2_url":"https://player.vimeo.com/video/928776408"
+          
+        }
+      }
+    ]
+
+  }

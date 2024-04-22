@@ -68,6 +68,9 @@ a.btn:hover{
 .popup img{
   width:45px;
 }
+.popup img.avatar{
+  width:150px;
+}
 .popup h2 {
   font-size:3.75em;
   margin: .5em;
@@ -90,21 +93,147 @@ a.btn:hover{
   top: 3em;
   width: 75%;
   background-color: white;
-  z-index: 2;
   margin: 0 auto;
   padding: 0 2em 2em 2em;
   z-index: -1;
 }
+
+#customPopupAvatar{
+  -webkit-box-shadow: 0px 0px 38px 3px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 0px 38px 3px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 38px 3px rgba(0,0,0,0.5);
+  position: relative;
+  top: 3em;
+  width: 75%;
+  background-color: white;
+  margin: 0 auto;
+  padding: 0 2em 2em 2em;
+  z-index: 2;
+}
+#avatarList{
+  /* -webkit-box-shadow: 0px 0px 38px 3px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 0px 38px 3px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 38px 3px rgba(0,0,0,0.5); */
+  position: absolute;
+  right:2em;
+  top: 4em;
+  width: 300px;
+  z-index: 2;
+  /* background-color: white;
+  
+  margin: 0 auto;
+  padding: 0 2em 2em 2em;
+  z-index: 2; */
+}
+#avatarList img{
+  display:block;
+  margin: 1em auto;
+}
+
+#avatarList img:hover{
+  cursor: pointer;
+}
+
+/* .audio{
+  position: relative;
+  top:-2em;
+} */
+
+#vimeo-player{
+  height:95vh;
+
+}
+
+
 </style>
 <script src="https://player.vimeo.com/api/player.js"></script>
+
 
 </head>
 <body>
   <div id="customPopup">
 
   </div>
+  <div id="avatarList">
+    <!-- <div class="avatarWrapper">
+      <div onclick="openAvatarPopup({'title':'Alexandre','description':'They are super cool!','image':'images/Avatars2_Alexandre.png','audio':'audio/Alexandre economique.m4a'})">
+        <img src="images/Avatars2_Alexandre.png" alt="Alexandre" />
+      </div>
+    </div> -->
+  </div>
 <div id="map"></div>
 <script>
+
+function close(){
+          customPopup.innerHTML = null;
+          customPopup.style.zIndex = -1;
+        }
+
+    function openAvatarPopup(data){
+      let customPopup=document.getElementById("customPopup");
+      customPopup.style.zIndex="99999999";
+
+      let output = `
+        <div>
+            <a id='closeBTN'>x</a>
+        </div>
+        <div id="popup" class="popup">
+          
+          <header>
+           <div>
+              <img class='avatar' src='${data['image']}' alt='map pin icon'>
+            </div>
+            <h2>${data['title']}</h2>
+          </header>
+           
+          <p>${data['description']}</p>
+          
+          <div class="audio">
+            <audio controls>
+              <source src="${data['audio']}" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+
+          </div>
+        </div>`
+
+        customPopup.innerHTML= output;
+
+        document.getElementById("closeBTN").addEventListener("click", close);
+        
+    }
+
+fetch('data/sociologique.geojson')
+          .then(response => response.json())
+          .then(mapdata => {
+            console.log('mapdata', mapdata)
+
+  fetch('data/sociologique.json')
+          .then(response => response.json())
+          .then(avatars => {
+            console.log('avatars', avatars)
+
+            let avatarList = document.getElementById('avatarList')
+
+            let output = '';
+
+            for (let i=0; i<avatars.features.length; i++){
+              let item = avatars.features[i]
+              output += `
+              <div class="avatarWrapper">
+                <div onclick="openAvatarPopup({'title':'${item.title}','description':'${item.description}','image':'${item.image}','audio':'${item.audio}'})">
+                  <img src="${item.image}" alt="${item.title}" />
+                </div>
+              </div>`
+            }
+
+            avatarList.innerHTML = output;
+
+          })// CLOSE FETCH
+      .catch(error => console.log(error));
+          
+
 	// TO MAKE THE MAP APPEAR YOU MUST
 	// ADD YOUR ACCESS TOKEN FROM
 	// https://account.mapbox.com
@@ -121,6 +250,10 @@ a.btn:hover{
     });
 
     map.addControl(new mapboxgl.NavigationControl());
+
+    
+
+    
 
 
     map.on('load', () => {
@@ -181,45 +314,14 @@ a.btn:hover{
             labelLayerId
         );
 
+        
+    
+    
+
       // ADD LOCATIONS SOURCE
       map.addSource('locations',{
           'type':'geojson',
-          'data':{
-            'type':'FeatureCollection',
-            'features':[
-              {
-                'type':'Feature',
-                'geometry':{
-                    'type':'Point',
-                    'coordinates':[2.3598299307550032, 48.828465136099496]
-                },
-                'properties':{
-                  'title':'Parc de Choisy',
-                  'description':"Lorsqu'il fait beau, les habitants du 13e se réunissent dans le parc de Choisy pour s'asseoir et lire, jouer au ping-pong ou au basket, pratiquer le tai-chi, tandis que les enfants jouent dans l’aire de jeux. Appuyez ci-dessous pour découvrir ce que les habitants du 13e, qui ne sont pas d'origine asiatique et se trouvent dans le parc, pensent des communautés asiatiques de Paris.",
-                  'button_1_label':"Découvrir",
-                  'button_1_url':'https://www.parismosaique.fr/parc-de-choisy',
-                  'button_2_label':"Balade",
-                  'button_2_url':'https://player.vimeo.com/video/928786348',
-                }
-              },
-              {
-                'type':'Feature',
-                'geometry':{
-                    'type':'Point',
-                    'coordinates':[2.3693678659581257, 48.823979955895304]
-                },
-                'properties':{
-                  'title':'Église Passage National',
-                  'description':"L'église Passage National se compose de deux églises qui assurent respectivement le culte sinophone et francophone : l'ECMCF (sinophone) et l'Église Protestante Évangélique du Chemin (EPEC). Le dimanche, des jeunes se retrouvent au rez-de-chaussée pour une messe française-anglaise, tandis que leurs mères se retrouvent à l'étage pour une messe en chinois mandarin.",
-                  'button_1_label':"Plus d'infos",
-                  'button_1_url':'https://www.parismosaique.fr/%C3%A9glise-passage-national',
-                  'button_2_label':null,
-                  'button_2_url':null,
-                }
-              }
-            ]
-
-          }
+          'data':mapdata
         }
       )
       // END LOCATIONS SOURCE
@@ -240,22 +342,17 @@ a.btn:hover{
       // LOCATIONS CLICK
       map.on('click', 'location_points', (e) => {
 
-//         let video =`
-//         <iframe id="vimeo-player" src="${e.features[0].properties.button_2_url}?autoplay=1&loop=1&autopause=0&playsinline=1" width="100%" height="360" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-          // </div>
-// <p><a href="https://vimeo.com/921089310">Dalle des Olympiades</a> from <a href="https://vimeo.com/user207379052">Cheryl Zhang</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-//           `
-        console.log("Clicked", e)
-
         document.getElementById("customPopup").style.zIndex="99999999";
 
         let popup = document.getElementById(customPopup)
 
 
-        let output = `<div class="popup">
-          <div>
+        let output = `
+        <div>
               <a id='closeBTN'>x</a>
           </div>
+          <div id="popup" class="popup">
+          
           <header>
            <div>
               <img src='images/map-pin.png' alt='map pin icon'>
@@ -270,66 +367,66 @@ a.btn:hover{
           if (e.features[0].properties.button_1_url){
             output+=`
                   <div class="quad-top">
-                    <a class="btn" href="${e.features[0].properties.button_1_url}">${e.features[0].properties.button_1_label}</a>
+                    <a class="btn" href="${e.features[0].properties.button_1_url}" target="_parent">${e.features[0].properties.button_1_label}</a>
                   `
                   // IF THE SECOND BUTTON IS NOT NULL
                   if (e.features[0].properties.button_2_label){
-                    output+=`<a id='video_btn' class="btn" href="javascript:void(0))">${e.features[0].properties.button_2_label}</a>
-                    <div id="video-container"></div>
-                    `
+                    output+=`<a id='video_btn' class="btn" href="javascript:void(0))">${e.features[0].properties.button_2_label}</a>`
 
                     // VIDEO LOGIC
                     var vid_url = e.features[0].properties.button_2_url
 
                     myTimeout = setTimeout(function(){ 
                       
-                      setupBTN()}, 250);
-
+                      setupBTN();
+                    }, 250);
                     function showVideo(e){
                       e.preventDefault()
                       console.log("video is displayed");
                       clearTimeout(myTimeout);
 
                       var vid_wrapper = document.getElementById("video-container");
-                      vid_wrapper.innerHTML = `<iframe id="vimeo-player" src="${vid_url}?autoplay=1&loop=1&autopause=0&playsinline=1" width="100%" height="360" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+                      vid_wrapper.innerHTML = `<iframe id="vimeo-player" src="${vid_url}?autoplay=1&loop=1&autopause=0&playsinline=1" width="100%" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
 
                       // FULL SCREEN ON CLICK
                       var iframe = document.querySelector('#vimeo-player');
                       var player = new Vimeo.Player(iframe);
 
-                      // GETS FULL SCREEN FROM BROWSER
-                      function requestFullScreen(element) {
-                        if (element.requestFullscreen) {
-                            element.requestFullscreen();
-                        } else if (element.mozRequestFullScreen) {
-                            element.mozRequestFullScreen(); // Firefox
-                        } else if (element.webkitRequestFullscreen) {
-                            element.webkitRequestFullscreen(); // Chrome, Safari and Opera
-                        } else if (element.msRequestFullscreen) {
-                            element.msRequestFullscreen(); // IE/Edge
-                        }
-                      }
+                      document.getElementById("popup").style.display="none";
+                      document.getElementById("customPopup").style.width="95%";
+                      document.getElementById("customPopup").style.top="1em";
 
-                      requestFullScreen(iframe)
+
+                      // // GETS FULL SCREEN FROM BROWSER
+                      // function requestFullScreen(element) {
+                      //   if (element.requestFullscreen) {
+                      //       element.requestFullscreen();
+                      //   } else if (element.mozRequestFullScreen) {
+                      //       element.mozRequestFullScreen(); // Firefox
+                      //   } else if (element.webkitRequestFullscreen) {
+                      //       element.webkitRequestFullscreen(); // Chrome, Safari and Opera
+                      //   } else if (element.msRequestFullscreen) {
+                      //       element.msRequestFullscreen(); // IE/Edge
+                      //   }
+                      // }
+
+                      // requestFullScreen(iframe)
 
                       
 
-                      function checkFullScreen(){
+                      // function checkFullScreen(){
                         
-                        if(document.fullscreenElement){
-                          console.log("is full screen")
-                        }else{
-                          clearInterval(fullScreenInterval)
-                          console.log("all done")
-                          vid_wrapper.innerHTML = null;
-                        }
+                      //   if(document.fullscreenElement){
+                      //     console.log("is full screen")
+                      //   }else{
+                      //     clearInterval(fullScreenInterval)
+                      //     console.log("all done")
+                      //     vid_wrapper.innerHTML = null;
+                      //   }
 
-                      }
+                      // }
 
-                      var fullScreenInterval = setInterval(checkFullScreen, 100);
-
-
-                     
+                      // var fullScreenInterval = setInterval(checkFullScreen, 100);
 
                     }
 
@@ -342,13 +439,13 @@ a.btn:hover{
                   }
             output +=`</div>`
           }
+          output +=`</div><div id="video-container"></div>`
 
         customPopup.innerHTML= output;
 
-        function close(){
-          customPopup.innerHTML = null;
-          customPopup.style.zIndex = -1;
-        }
+        
+
+
         document.getElementById("closeBTN").addEventListener("click", close);
 
         // END ADD BUTTONS
@@ -368,6 +465,10 @@ a.btn:hover{
 
 
     });
-</script>
+
+  })// CLOSE FETCH
+      .catch(error => console.log(error));
+  </script>
 
 </body>
+</html>

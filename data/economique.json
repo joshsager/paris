@@ -1,0 +1,24 @@
+{
+    "type":"FeatureCollection",
+    "features":[
+      {
+        "title":"Alexandre",
+        "description":"Alexandre parle de sa vie quotidienne dans le quartier asiatique",
+        "image":"images/Avatars2_Alexandre.png",
+        "audio":"audio/Alexandre economique.m4a"
+      },
+      {
+        "title":"Daniel",
+        "description":"Daniel parle des sorties familiales dans le quartier asiatique le week-end pour faire du shopping",
+        "image":"images/Avatars2_Daniel.png",
+        "audio":"audio/Daniel economique.m4a"
+      },
+      {
+        "title":"Thanh",
+        "description":"Thanh parle des différents commerces dans le quartier asiatique",
+        "image":"images/Avatars2_Thanh.png",
+        "audio":"audio/Thanh economique.m4a"
+      }
+    ]
+
+  }

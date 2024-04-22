@@ -1,0 +1,52 @@
+{
+  "type":"FeatureCollection",
+  "features":[
+    {
+      "type":"Feature",
+      "geometry":{
+          "type":"Point",
+          "coordinates":[2.3660354446682126, 48.82432914314818] 
+      },
+      "properties":{
+        "title":"Galerie Oslo",
+        "description":"De la dalle des Olympiades, on passe par la galerie Oslo pour arriver à l'avenue d'Ivry. Dans ce centre commercial, on peut trouver de nombreux commerces « ethniques », tels que des restaurants, des bijouteries, des magasins de cassettes audio ou vidéo, des boutiques de prêt-à-porter avec des robes chinoises et des tissus chamarrés, des agences de voyage, et des boutiques de téléphonie.",
+        "button_1_label":"Plus d'infos",
+        "button_1_url":"https://www.parismosaique.fr/galerie-oslo",
+        "button_2_label":null,
+        "button_2_url":null
+      }
+    },
+    {
+      "type":"Feature",
+      "geometry":{
+          "type":"Point",
+          "coordinates":[2.365606507075332, 48.823732004424016]
+      },
+      "properties":{
+        "title":"Tang Frères & Paris Store",
+        "description":"Tang Frères est le plus grand supermarché asiatique de Paris, et Paris Store le deuxième plus grand. Ces deux supermarchés offrent une grande variété d’aliments et de produits asiatiques, permettant aux membres de la communauté asiatique de préserver leurs traditions alimentaires.",
+        "button_1_label":"Plus d'infos",
+        "button_1_url":"https://www.parismosaique.fr/tang-fr%C3%A8res-et-paris-store",
+        "button_2_label":"Balade à l'église Passage National",
+        "button_2_url":"https://player.vimeo.com/video/928786826"
+      }
+    },
+    {
+      "type":"Feature",
+      "geometry":{
+          "type":"Point",
+          "coordinates":[2.3591110987852475, 48.82704546108857]
+      },
+      "properties":{
+        "title":"De Nhat Pho",
+        "description":"Dans le 13e arrondissement, il est très facile de trouver de la nourriture asiatique délicieuse, notamment dans les restaurants de pho, tels que De Nhat Pho.",
+        "button_1_label":null,
+        "button_1_url":null,
+        "button_2_label":null,
+        "button_2_url":null
+        
+      }
+    }
+  ]
+
+}
