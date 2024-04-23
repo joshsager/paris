@@ -205,7 +205,7 @@ function close(){
           
           <div class="audio">
             <audio controls>
-              <source src="${data['audio']}" type="audio/mpeg">
+              <source src="${data['audio']}" type="audio/mp4">
             Your browser does not support the audio element.
             </audio>
           </div>
@@ -431,7 +431,9 @@ fetch('data/economique.geojson')
 
                       function checkFullScreen(){
                         
-                        if(document.fullscreenElement){
+                        if(document.fullscreenElement
+                            || document.webkitFullscreenElement
+                            || document.mozFullScreenElement){
                           console.log("is full screen")
                         }else{
                           clearInterval(fullScreenInterval)
