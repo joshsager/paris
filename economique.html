@@ -348,7 +348,9 @@ fetch('data/economique.geojson')
         'source': 'locations',
         'layout': {
               'icon-image': 'mapPin', // reference the image
-              'icon-size': .75
+              'icon-size': .75,
+              'icon-allow-overlap': false,
+              'icon-ignore-placement': true,
             },
           'filter': ['==', '$type', 'Point']
         });
